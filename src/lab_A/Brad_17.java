@@ -9,15 +9,19 @@ public class Brad_17 {
 
 		System.out.println(bike1);
 		System.out.println(bike2);
-		System.out.println(bike1.speed);
-		System.out.println(bike2.speed);
+		System.out.println(bike1.getSpeed());
+		System.out.println(bike2.getSpeed());
 
 		bike1.upSpeed();
 		bike1.upSpeed();
 		bike1.upSpeed();
 		bike1.upSpeed();
 
-		System.out.println(bike1.speed);
-		System.out.println(bike2.speed);
+		System.out.println(bike1.getSpeed());
+		System.out.println(bike2.getSpeed());
+		
+//		bike2.speed = 10.1;
+		System.out.println(bike2.getSpeed());
+		
 	}
 }
