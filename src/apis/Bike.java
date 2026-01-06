@@ -4,7 +4,7 @@ package apis;
 public class Bike {
 //	腳踏車speed	
 	
-	protected double speed;
+	public double speed;
 
 	public void upSpeed() {
         speed = speed < 1 ? 1 : speed * 1.3;
