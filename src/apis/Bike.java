@@ -1,11 +1,12 @@
-package lab_A;
+package apis;
+
 
 public class Bike {
 //	腳踏車speed	
 	
-	private double speed;
+	protected double speed;
 
-	void upSpeed() {
+	public void upSpeed() {
         speed = speed < 1 ? 1 : speed * 1.3;
 	}
 	
@@ -15,8 +16,5 @@ public class Bike {
 	public double getSpeed() {
 		return speed;
 	}
-	
-	
-	
-	
 }
+	
