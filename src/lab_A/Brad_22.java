@@ -1,5 +1,11 @@
 package lab_A;
 
+//這支程式在示範三件事：
+//1	怎麼從字串拿出某一個字
+//2	== 在「數字」跟「字串」上到底在比什麼
+//3 為什麼字串要用 equals()，不能亂用 ==
+
+
 public class Brad_22 {
 
 	public static void main(String[] args) {
