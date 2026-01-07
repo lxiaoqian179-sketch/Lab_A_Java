@@ -1,4 +1,7 @@
 package lab_A;
+//Swing 版「猜數字（幾 A 幾 B）」遊戲
+
+
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
