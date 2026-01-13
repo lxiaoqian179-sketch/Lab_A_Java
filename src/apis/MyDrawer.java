@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 public class MyDrawer extends JPanel {
 	private List<Line> lines, recycle;
+    private Color defaultColor = Color.BLUE;
+    private float defaultWidth = 4.0f;
 	
 	
 	public MyDrawer() {
@@ -31,8 +33,8 @@ public class MyDrawer extends JPanel {
 		super.paintComponent(g);
 		
 		Graphics2D g2d = (Graphics2D)g;
-		g2d.setStroke(new BasicStroke(4));
-		g2d.setColor(Color.BLUE);
+		g2d.setStroke(new BasicStroke(defaultWidth));
+		g2d.setColor(defaultColor);
 		
 		for (Line line : lines) {
 			for (int i = 1; i< line.getSize(); i++) {
@@ -80,4 +82,15 @@ public class MyDrawer extends JPanel {
 		}
 	}
 	
+	public void changeColor(Color newColor) {
+		defaultColor = newColor;
+		repaint();
+	}
+	public Color getColor() {return defaultColor;}
+	
+	public void changeWidth(float width) {
+		defaultWidth = width;
+		repaint();
+	}
 }
+	
