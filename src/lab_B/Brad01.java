@@ -18,6 +18,7 @@ public class Brad01 {
 			System.out.println("OK");
 //			如果成功載入 Driver，程式會執行到這一行
 //			代表:Driver jar 存在、類名正確、環境設定成功
+			
 		}catch (ClassNotFoundException e) {
 //			捕捉 Class.forName(...) 可能拋出的例外
 //			ClassNotFoundException 是：
