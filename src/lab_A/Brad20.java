@@ -1,54 +1,37 @@
 package lab_A;
-//有錯，待補
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Brad20 {
-	private static final String URL = "jdbc:mysql://localhost:3306/iii";
+	private static final String URL = "jdbc:mysql://localhost:3306/northwind";
 	private static final String USER = "root";
 	private static final String PASSWD = "root";
 	private static final String SQL_QUERY = """
-			SELECT `CustomerID`, `CompanyName`
-FROM `customers` 
-WHERE `CustomerID` IN (
-	SELECT `CustomerID`
-    FROM orders
-    WHERE OrderDate BETWEEN '1997-01-01' AND '1997-12-31'
-)
-
+			SELECT o.EmployeeID id, e.LastName name, SUM(od.UnitPrice*od.Quantity) sum
+			FROM `orders` o
+				JOIN employees e ON o.EmployeeID = e.EmployeeID
+			    JOIN orderdetails od ON o.OrderID = od.OrderID
+			GROUP BY o.EmployeeID
+			ORDER BY sum DESC
+			""";
 	public static void main(String[] args) {
 		try (Connection conn = DriverManager.getConnection(URL, USER, PASSWD);
-				PreparedStatement pstmt = conn.prepareStatement(SQL_QUERY)){
+				PreparedStatement pstmt = conn.prepareStatement(SQL_QUERY);
+				ResultSet rs = pstmt.executeQuery();){
 			
-			pstmt.setInt(1, 1);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				InputStream in = rs.getBinaryStream("bike");
-				ObjectInputStream oin = new ObjectInputStream(in);
-				Object obj = oin.readObject();
-				if(obj instanceof Bike) {
-					Bike bike = (Bike)obj;
-					System.out.println(bike);
-				}
-								
-			}else {
-				System.out.println("Member NOT EXIST");
-
-				
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String name = rs.getString("name");
+				String sum = rs.getString("sum");
+				System.out.printf("%s:%s:%s\n", id, name, sum);
+			}
 			
-		}catch(IOException e) {
-			System.out.println(e);
-		}catch (SQLException e) {
-			System.out.println(e);
-		
-		}catch (Exception e) {
+		}catch(Exception e) {
 			System.out.println(e);
 		}
 	}
+
+}

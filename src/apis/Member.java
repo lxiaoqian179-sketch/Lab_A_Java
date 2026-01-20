@@ -4,10 +4,9 @@ public class Member {
 	private long id;
 	private String email, passwd, name;
 	
-	public Member() {}	
+	public Member() {}
 	
-	
-	public Member(int id, String email, String passwd, String name) {
+	public Member(long id, String email, String passwd, String name) {
 		this.id = id;
 		this.email = email;
 		this.passwd = passwd;
@@ -41,6 +40,5 @@ public class Member {
 	@Override
 	public String toString() {
 		return String.format("%s:%s", email, name);
-	}
-	
+	}	
 }

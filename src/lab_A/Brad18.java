@@ -1,42 +1,75 @@
 package lab_A;
 
+import java.util.List;
+
+import apis.Member;
 import apis.MemberDAO;
 import apis.MemberDAOImpl;
 
 public class Brad18 {
-	public static void main(String[]args) {
+	public static void main(String[] args) {
 		MemberDAO dao = new MemberDAOImpl();
 		
-//		Member member = new Member();
-//		member.setEmail("b1@brad.tw");
-//		member.setPasswd("12345678");
-//		member.setEmail("B1");
-		
+		Member member = new Member();
+		member.setEmail("eric@brad.tw");
+		member.setPasswd("12345678");
+		member.setName("艾瑞克");
+		try {
+			if (dao.addMember(member)) {
+				System.out.println("OK1");
+			}else {
+				System.out.println("XX1");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+//		try {
+//			Member member = dao.findById(3);
+//			System.out.println(member.getEmail() + ":" + member.getName());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 //		try {
-//			if(dao.delMember(3)) {
+//			if (dao.delMember(3)) {
 //				System.out.println("DELETE success");
 //			}else {
 //				System.out.println("DELETE failure");
 //			}
-//		}catch (Exception e) {
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 		
 		
-		try {
-			Member member = dao.findById(2);
-			System.out.println(member.getEmail()+":"+member.getName());
-			member.setEmail("b1@brad.tw");
-			member.setPasswd("12345678");
-			if(dao.updateMember("12345678"))
-		}
+//		try {
+//			Member member = dao.findById(2);
+//			System.out.println(member.getEmail() + ":" + member.getName());
+//			member.setEmail("tony@brad.tw");
+//			member.setPasswd("12345678");
+//			if (dao.updateMember(member)) {
+//				System.out.println("OK3");
+//			}else {
+//				System.out.println("XX3");
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
+		try {
+			List<Member> members = dao.findAll();
+			for (Member m : members) {
+				System.out.printf("%d:%s:%s\n", m.getId(), m.getEmail(), m.getName());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		
 		
 		
 		
 		
 	}
-
 }

@@ -1,21 +1,22 @@
 package lab_A;
-//有錯，待補
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import apis.Bike;
+
 public class Brad17 {
 	private static final String URL = "jdbc:mysql://localhost:3306/iii";
 	private static final String USER = "root";
 	private static final String PASSWD = "root";
 	private static final String SQL_QUERY = """
-			SELECT id, email, name, icon
+			SELECT id, email, name, bike
 			FROM member
 			WHERE id = ?
 			""";
@@ -30,22 +31,21 @@ public class Brad17 {
 				InputStream in = rs.getBinaryStream("bike");
 				ObjectInputStream oin = new ObjectInputStream(in);
 				Object obj = oin.readObject();
-				if(obj instanceof Bike) {
+				if (obj instanceof Bike) {
 					Bike bike = (Bike)obj;
 					System.out.println(bike);
 				}
-								
 			}else {
 				System.out.println("Member NOT EXIST");
-
-				
+			}
 			
 		}catch(IOException e) {
 			System.out.println(e);
 		}catch (SQLException e) {
 			System.out.println(e);
-		
-		}catch (Exception e) {
+		}catch(Exception e) {
 			System.out.println(e);
 		}
 	}
+
+}
