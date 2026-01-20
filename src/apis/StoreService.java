@@ -38,14 +38,19 @@ public class StoreService {
 				
 				int stock = selectStockForUpdate(conn, productId);
 				System.out.println(stock + ":" + qty);
-				if (stock < qty) {
-					conn.rollback();
-					
-					throw new NotEnoughException("庫存量不足");
-				}
-				updateStock(conn, productId, stock - qty);
-				insertLog(conn, "OUT", productId, "OUT:" + qty);				
-				conn.commit();
+				//try {
+					if (stock < qty) {
+						insertLog(conn, "ERR", productId, stock + ":" + qty);
+						conn.commit();
+						throw new NotEnoughException("庫存量不足");
+					}else {
+						updateStock(conn, productId, stock - qty);
+						insertLog(conn, "OUT", productId, "OUT:" + qty);				
+						conn.commit();
+					}
+//				}catch(NotEnoughException e) {
+//					insertLog(conn, "ERR", productId, stock + ":" + qty);
+//				}
 			}
 			return null;
 		});		
