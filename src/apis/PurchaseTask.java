@@ -10,7 +10,11 @@ public class PurchaseTask implements Task{
 	
 	@Override
 	public void execute(StoreService service) throws Exception {
-		service.purchase(PRODUCT_ID, qty);
+		try {
+			service.purchase(PRODUCT_ID, qty);
+		}catch(NotEnoughException e) {
+			System.out.println("不足:" + qty);
+		}
 	}
 
 	@Override
